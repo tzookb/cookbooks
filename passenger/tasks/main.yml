@@ -1,0 +1,16 @@
+---
+
+#thanks to
+#https://www.digitalocean.com/community/tutorials/how-to-install-rails-and-nginx-with-passenger-on-ubuntu
+
+- name: Install Passenger
+  shell: gem install passenger
+
+- name: Install Nginx
+  apt: pkg=libcurl4-gnutls-dev state=installed update_cache=true
+  register: curlutilsinstalled
+
+- name: Intall passenger nginx
+  shell: rvmsudo passenger-install-nginx-module
+  when: curlutilsinstalled|success
+
