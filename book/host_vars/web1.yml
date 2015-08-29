@@ -1,0 +1,4 @@
+---
+# file: host_vars/web1
+
+hostvar1: ntp-atlanta.example.com

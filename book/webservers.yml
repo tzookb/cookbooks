@@ -1,0 +1,9 @@
+---
+
+# file: webservers.yml
+- hosts: web
+  roles:
+    - php56
+    - nginx
+    - mysql
+    - nodejs

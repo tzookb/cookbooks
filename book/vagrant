@@ -1,0 +1,4 @@
+
+
+[web]
+web1    ansible_ssh_host=10.0.15.10
