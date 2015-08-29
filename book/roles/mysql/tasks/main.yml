@@ -26,5 +26,8 @@
     - ::1
     - localhost
 
-  #sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password pass'
-  #sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password pass'
+- mysql_db:
+    name: bobdata
+    state: present
+    login_password: "{{ mysql_root_password }}"
+    login_user: root
