@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :ansible do |config|
       config.vm.box = "hashicorp/precise32"
       config.vm.hostname = "ansible"
-      config.vm.network :private_network, ip: "10.0.15.10"
+      config.vm.network :private_network, ip: "192.168.30.30"
       config.vm.provider "virtualbox" do |vb|
         vb.memory = "256"
       end

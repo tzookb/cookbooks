@@ -1,0 +1,7 @@
+---
+
+- name: sync stuff
+  synchronize:
+    src="./../syncme/"
+    dest="/home/vagrant/syncme"
+    rsync_opts="--exclude-from=nottt"

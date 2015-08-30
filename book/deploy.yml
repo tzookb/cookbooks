@@ -1,0 +1,7 @@
+---
+
+# file: deploy.yml
+- hosts: web
+  gather_facts: no
+  roles:
+    - deploy-rsync

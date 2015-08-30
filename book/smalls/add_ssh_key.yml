@@ -8,5 +8,5 @@
 
   - name: install ssh key
     authorized_key: user=vagrant 
-                    key="{{ lookup('file', '~/.ssh/ansible.pub') }}" 
+                    key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
                     state=present
