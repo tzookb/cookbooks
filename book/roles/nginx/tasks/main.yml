@@ -1,7 +1,7 @@
 ---
 
 - name: Add Nginx Repository
-  apt_repository: repo='ppa:ondrej/php5-5.6' state=present
+  apt_repository: repo='ppa:ondrej/php5' state=present
   sudo: yes
   register: nginxrepoAdded
 
@@ -13,6 +13,21 @@
      - nginx-common
      - nginx
      - php5-fpm
+     - php5
+     - php5-cli
+     - php5-curl
+     - php5-gd
+     - php5-mcrypt
   when: nginxrepoAdded|success
   notify:
     - Reload Nginx
+
+- name: write our nginx.conf
+  sudo: yes
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: Reload Nginx
+
+- name: write our /etc/nginx/sites-available/default
+  sudo: yes
+  template: src=default-site.j2 dest=/etc/nginx/sites-available/default
+  notify: Reload Nginx

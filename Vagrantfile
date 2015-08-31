@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
       config.vm.provider "virtualbox" do |vb|
         vb.memory = "256"
       end
+      
+      config.vm.synced_folder "/home/tzookb/www", "/web", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=775"]
   end
 
 end

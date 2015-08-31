@@ -1,0 +1,52 @@
+---
+
+- name: Add Php5 Repository
+  apt_repository: repo='ppa:ondrej/php5' state=present
+  sudo: yes
+  register: php5RepoAdded
+
+
+- name: Install Apache
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items:
+     - python-software-properties
+     - apache2
+     - php5
+     - php5-cli
+     - php5-curl
+     - php5-gd
+     - php5-mcrypt
+     - libapache2-mod-php5
+  when: php5RepoAdded|success
+  notify:
+    - Reload Apache2
+
+
+- name: write our apache2.conf
+  sudo: yes
+  template: src=apache2.conf.j2 dest=/etc/apache2/apache2.conf
+  notify: Reload Apache2
+
+
+- name: write our /etc/apache2/sites-available/default
+  sudo: yes
+  template: src=default-site.j2 dest=/etc/apache2/sites-available/000-default.conf
+  notify: Reload Apache2
+
+
+- name: write each site conf
+  sudo: yes
+  template: src=php-site.j2 dest=/etc/apache2/sites-available/{{item.servername}}.conf
+  with_items: "{{apache_vhosts}}"
+  notify: Reload Apache2
+
+
+- name: a2ensite all sites
+  sudo: yes
+  command: a2ensite {{ item.servername }}.conf
+  args:
+    creates: /etc/apache2/sites-enabled/{{ item.servername }}.conf
+  with_items: "{{apache_vhosts}}"
+  notify:
+    - Reload Apache2
