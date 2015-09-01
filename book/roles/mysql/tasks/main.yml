@@ -6,7 +6,7 @@
   with_items:
     - python-mysqldb
     - mysql-server-5.5
-    #- php5-mysql
+    - php5-mysql
   notify:
     - Reload MySql
 

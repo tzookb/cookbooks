@@ -5,15 +5,13 @@
 
   vars:
     apache_vhosts:
-      - {servername: "example.local", documentroot: "/web/example/"}
+      - {servername: "babelfish.local", documentroot: "/web/babelfish/public/"}
     mysql_dbs:
-      - name: db1
-        encoding: utf8
-        collation: utf8_general_ci
+      - name: babelfish
 
   roles:
+    - mysql
     - apache #only this install all needed for apache-php server
     #- nginx #only this install all needed for nginx-php server
     #- php56
-    - mysql
     #- nodejs

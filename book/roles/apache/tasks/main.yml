@@ -19,9 +19,16 @@
      - php5-mcrypt
      - libapache2-mod-php5
   when: php5RepoAdded|success
+  register: apacheInstalled
   notify:
     - Reload Apache2
 
+- name: enabled mod_rewrite
+  sudo: yes
+  apache2_module: state=present name=rewrite
+  when: apacheInstalled|success
+  notify:
+      - Reload Apache2
 
 - name: write our apache2.conf
   sudo: yes
