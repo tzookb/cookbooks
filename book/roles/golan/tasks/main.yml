@@ -1,0 +1,35 @@
+---
+
+- name: install extras
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items:
+    - git
+    - vim
+
+- name: install global zend for cellular
+  sudo: yes
+  git:
+    repo=https://github.com/zendframework/zf2.git
+    dest=/usr/share/php5/zf2
+    version=release-2.2.8
+    force=yes
+  register: downloadedZf2
+
+- name: copy Zend to fodler
+  sudo: yes
+  synchronize:
+    src=/usr/share/php5/zf2/library/Zend/
+    dest=/usr/share/php5/
+  when: downloadedZf2|success
+
+- name: Remove Zf2 from folder
+  sudo: yes
+  command: rm -r /usr/share/php5/zf2
+  when: downloadedZf2|success
+
+- name: add the path to zend in php.ini
+  sudo: yes
+  lineinfile:
+    dest=/etc/php5/apache2/php.ini
+    line='include_path = ".:/usr/share/php:/usr/share/php5"'

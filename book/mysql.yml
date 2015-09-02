@@ -1,0 +1,22 @@
+---
+
+# file: webservers.yml
+- hosts: mysql
+  gather_facts: no
+
+  vars:
+    mysql_dbs:
+      - name: babelfish
+      - name: gtcrm
+
+  roles:
+    - mysql
+
+  tasks:
+#  - name: install extras
+#    sudo: yes
+#    apt: pkg={{item}} state=latest update_cache=true
+#    with_items:
+#      - git
+#      - vim
+

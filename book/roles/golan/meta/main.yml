@@ -1,0 +1,4 @@
+---
+dependencies:
+  - { role: mysql, some_parameter: 3 }
+  - { role: apache, port: 80 }
