@@ -1,11 +1,6 @@
 
-#localhost   ansible_connection=local
-
 [web]
-web1    ansible_ssh_host=192.168.30.30
-
-[web2]
-web2    ansible_ssh_host=192.168.50.50
+web1    ansible_ssh_host=10.0.15.10
 
 [mysql]
-mysql    ansible_ssh_host=192.168.69.69
+mysql1    ansible_ssh_host=10.0.15.21

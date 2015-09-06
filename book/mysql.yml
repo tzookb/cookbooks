@@ -6,13 +6,22 @@
 
   vars:
     mysql_dbs:
-      - name: babelfish
-      - name: gtcrm
+      - name: mydb
 
   roles:
     - mysql
 
   tasks:
+  - name: add user to db
+    mysql_user:
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      name: bob
+      password: "12345"
+      priv: "*.*:ALL"
+      host: "10.0.15.10"
+      state: present
+
 #  - name: install extras
 #    sudo: yes
 #    apt: pkg={{item}} state=latest update_cache=true
