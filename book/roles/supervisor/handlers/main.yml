@@ -1,0 +1,13 @@
+---
+
+- name: Start Supervisor
+  sudo: yes
+  service: name=supervisor state=started enabled=yes
+
+- name: Restart Supervisor
+  sudo: yes
+  service: name=supervisor state=restarted enabled=yes
+
+- name: boo
+  debug: "{{item}}"
+  #supervisorctl: name=my_app state=started

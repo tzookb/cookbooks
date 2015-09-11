@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
           vb.memory = "2048"
         end
 
-        config.vm.synced_folder "/home/tzookb/www", "/web", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=775"]
+        config.vm.synced_folder "/Users/tzookb/www", "/web", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=775"]
     end
 
 
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
         vb.memory = "2048"
       end
 
-      config.vm.synced_folder "/home/tzookb/www", "/web", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=775"]
+      config.vm.synced_folder "/Users/tzookb/www", "/web", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=775"]
     end
 
 end

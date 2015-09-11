@@ -1,5 +1,4 @@
 ---
-
-#- name: Start Apache2
-#  sudo: yes
-#  service: name=apache2 state=started
+# handlers file for rabbitmq
+- name: restart rabbitmq-server
+  service: name=rabbitmq-server state=restarted enabled=yes

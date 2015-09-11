@@ -1,0 +1,17 @@
+---
+
+- name: Install Supervisor
+  sudo: yes
+  apt: pkg={{item}} state=latest
+  with_items:
+     - supervisor
+  register: supervisorInstalled
+  notify: Start Supervisor
+
+- name: add supervised conf
+  sudo: yes
+  template: src=default.conf.j2 dest="/etc/supervisor/conf.d/{{item.name}}.conf"
+  with_items: "{{supervisorConfs}}"
+  notify:
+    - Restart Supervisor
+    - boo
