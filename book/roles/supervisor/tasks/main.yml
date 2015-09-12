@@ -12,6 +12,7 @@
   sudo: yes
   template: src=default.conf.j2 dest="/etc/supervisor/conf.d/{{item.name}}.conf"
   with_items: "{{supervisorConfs}}"
-  notify:
-    - Restart Supervisor
-    - boo
+
+- name: start supervised confs
+  supervisorctl: name={{item.name}} state=started
+  with_items: "{{supervisorConfs}}"
