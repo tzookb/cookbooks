@@ -18,7 +18,7 @@
 
 - name: copy Zend to fodler
   sudo: yes
-  command: mv /usr/share/php5/zf2/library/Zend/ /usr/share/php5/
+  command: rsync -r /usr/share/php5/zf2/library/Zend/ /usr/share/php5/Zend/
   when: downloadedZf2|success
 
 - name: Remove Zf2 from folder
