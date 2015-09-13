@@ -13,4 +13,9 @@
       - name: gtcrm
 
   roles:
-    - golan
+    roles:
+        - {role: golan, apache_vhosts: [
+              {servername: "babelfish.local", documentroot: "/web/babelfish/public/"},
+              {servername: "cellular.local", documentroot: "/web/cellular/"}
+              ],
+          }
