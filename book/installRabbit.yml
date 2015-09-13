@@ -5,16 +5,16 @@
   gather_facts: no
 
   vars:
-    supervisorConfs:
-      - {
-          name: "nameOfTask",
-          autorestart: true,
-          user: "www-data",
-          autostart: true,
-          command: "bash /home/vagrant/boom.sh",
-          stdout_logfile: "/tmp/supp.log"
-        }
+    supervisorConfs: []
+#      - {
+#          name: "nameOfTask",
+#          autorestart: true,
+#          user: "www-data",
+#          autostart: true,
+#          command: "bash /home/vagrant/boom.sh",
+#          stdout_logfile: "/tmp/supp.log"
+#        }
 
   roles:
-    #- rabbitmq
+    - rabbitmq
     - supervisor

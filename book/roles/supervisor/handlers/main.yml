@@ -7,3 +7,6 @@
 - name: Restart Supervisor
   sudo: yes
   service: name=supervisor state=restarted enabled=yes
+
+- name: start supervised confs
+  supervisorctl: name={{whatever.results[0].item.name}} state=started
