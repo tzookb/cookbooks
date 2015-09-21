@@ -3,9 +3,9 @@
 server {
 	
 	listen 80;
-	server_name {{ ansible_hostname }};
-	root /usr/share/nginx/html;
-	index index.html index.htm;
+	server_name {{ item.servername }};
+	root {{ item.documentroot }};
+	index index.php index.html index.htm;
 
     charset utf-8;
 
@@ -18,8 +18,8 @@ server {
     location = /robots.txt  { access_log off; log_not_found off; }
 
 
-    access_log /var/log/nginx/{{ ansible_hostname }}/error.log error;;
-    error_log  /var/log/nginx/{{ ansible_hostname }}/error.log error;
+    access_log /var/log/nginx/{{ item.servername }}/error.log;
+    error_log  /var/log/nginx/{{ item.servername }}/error.log;
 
     error_page 404 /index.php;
 

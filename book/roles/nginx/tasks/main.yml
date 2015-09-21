@@ -31,3 +31,9 @@
   sudo: yes
   template: src=default-site.j2 dest=/etc/nginx/sites-available/default
   notify: Reload Nginx
+
+- name: write each site conf
+  sudo: yes
+  template: src=php-site.j2 dest=/etc/nginx/sites-available/{{item.servername}}.conf
+  with_items: "{{nginx_vhosts}}"
+  notify: Reload Nginx

@@ -26,12 +26,16 @@
     - ::1
     - localhost
 
+- name: pah pah pah pah
+  debug: msg="System {{ mysql_dbs }}"
+
+
 - name: create databases
   mysql_db:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     collation: "{{ item.collation | default('utf8_general_ci') }}"
     encoding: "{{ item.encoding | default('utf8') }}"
     state: present
     login_password: "{{ mysql_root_password }}"
     login_user: root
-  with_items: mysql_dbs
+  with_items: "{{ mysql_dbs }}"
