@@ -19,3 +19,13 @@
      - php5-mcrypt
   when: php56repoAdded|success
   register: phpInstalled
+
+
+
+
+
+
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
