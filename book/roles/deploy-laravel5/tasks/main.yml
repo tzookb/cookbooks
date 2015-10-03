@@ -1,0 +1,17 @@
+---
+
+- name: deploy laravel projects
+  synchronize:
+      src: "{{item.src}}"
+      dest: "{{item.dest}}"
+      rsync_opts:
+        - "--exclude-from={{item.excludes}}"
+  with_items: "{{projects}}"
+
+
+
+- name: add the .env file
+  copy:
+    src: "{{item.envFile}}"
+    dest: "{{item.dest}}.env"
+  with_items: "{{projects}}"
