@@ -1,10 +1,10 @@
 ---
 
-apache_vhosts:
-  []
+# apache_vhosts:
+#   []
   #- {servername: "babelfish.local", documentroot: "/web/babelfish/public/"}
   #- {servername: "cellular.local", documentroot: "/web/cellular/"}
-mysql_dbs:
-  []
+# mysql_dbs:
+#   []
   #- name: babelfish
   #- name: gtcrm

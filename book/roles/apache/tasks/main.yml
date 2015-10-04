@@ -1,8 +1,15 @@
 ---
 
-- name: Add Php5 Repository
+- name: Add Php 5.3 Repository
+  apt_repository: repo='ppa:eugenesan/ppa' state=present
+  sudo: yes
+  when: phpVersion==5.3
+  register: php5RepoAdded
+
+- name: Add Php 5.5 Repository
   apt_repository: repo='ppa:ondrej/php5' state=present
   sudo: yes
+  when: phpVersion==5.5
   register: php5RepoAdded
 
 
@@ -41,6 +48,8 @@
   template: src=default-site.j2 dest=/etc/apache2/sites-available/000-default.conf
   notify: Reload Apache2
 
+
+- debug: msg="{{apache_vhosts}}"
 
 - name: write each site conf
   sudo: yes
