@@ -42,6 +42,13 @@
   apt: pkg=nodejs state=latest update_cache=true
   when: distrosupported|success
 
+
+
+
+
+- debug: msg="{{npm_pkgs}}"
+
+
 - name: install global npm packages
   sudo: yes
   npm: name={{item}} global=yes state=latest
