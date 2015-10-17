@@ -5,13 +5,28 @@
   sudo: yes
   register: php56repoAdded
 
-- name: Install PHP 5.6
+- name: Install PHP 5.6 base apache
   sudo: yes
   apt: pkg={{item}} state=latest update_cache=true
   with_items:
-     - php5-fpm
+    - python-software-properties
+  when: phpFor == "apache"
+  register: phpInstalled
+
+- name: Install PHP 5.6 base  nginx
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items:
+    - php5-fpm
+  when: phpFor == "nginx"
+  register: phpInstalled
 
 
+
+- name: Install PHP 5.6 extras
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items:
      - php5
      - php5-cli
      - php5-curl
@@ -29,3 +44,22 @@
   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   args:
     creates: /usr/local/bin/composer
+  when: addComposer is defined
+
+
+
+  #
+  #
+  #- name: ensure php5-fpm cgi.fix_pathinfo=0
+  #  sudo: yes
+  #  lineinfile: dest=/etc/php5/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
+  #  notify:
+  #    - Restart php5-fpm
+  #    - Reload Nginx
+  #
+  #
+  #- name: enable php5 mcrypt module
+  #  sudo: yes
+  #  shell: php5enmod mcrypt
+  #  args:
+  #    creates: /etc/php5/cli/conf.d/20-mcrypt.ini

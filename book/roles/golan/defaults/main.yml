@@ -1,5 +1,0 @@
----
-#place for vars to this role
-
-#apache_vhosts: []
-  #- {servername: "www.domain.tld", documentroot: "/var/www/html"}
