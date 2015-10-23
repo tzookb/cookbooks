@@ -1,1 +1,7 @@
+---
 #place for vars to this role
+
+
+# each one should contain:
+# {servername: "hagai.dev", documentroot: "/web/hagai/", confType: "nginx"}
+nginx_vhosts: []
