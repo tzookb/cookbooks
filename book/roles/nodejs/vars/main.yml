@@ -1,1 +1,8 @@
 #place for vars to this role
+
+# each one should contain:
+# {servername: "hagai.dev", documentroot: "/web/hagai/", confType: "nginx", urlFullPath: "http://localhost:8082"}
+nginx_vhosts: []
+
+# which packages of npm to install globally
+npm_pkgs: []
