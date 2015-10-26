@@ -4,11 +4,14 @@
     url='https://deb.nodesource.com/node/dists/"{{ ansible_distribution_release }}"/Release'
     dest=/dev/null
   register: distrosupported
+
+
 - name: Remove Old Chris Lea PPA
   apt_repository:
     repo='ppa:chris-lea/node.js'
     state=absent
   when: distrosupported|success
+  ignore_errors: yes
 
 - name: Remove Old Chris Lea Sources
   sudo: yes
@@ -16,6 +19,7 @@
     path='/etc/apt/sources.list.d/chris-lea-node_js-"{{ ansible_distribution_release }}".list'
     state=absent
   when: distrosupported|success
+  ignore_errors: yes
 
 - name: Add Nodesource Keys
   sudo: yes

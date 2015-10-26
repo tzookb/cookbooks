@@ -11,7 +11,17 @@ server {
 
 
 	location / {
-        try_files $uri $uri/ /index.php?$query_string;
+
+	    {% if item.siteType == "laravel" %}
+            #laravel
+            try_files $uri $uri/ /index.php?$query_string;
+        {% else %}
+            #wordpress
+            try_files $uri $uri/ /index.php?q=$uri&$args;
+        {% endif %}
+
+
+
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }

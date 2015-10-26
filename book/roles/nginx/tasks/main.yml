@@ -1,10 +1,5 @@
 ---
 
-- name: Add Nginx Repository
-  apt_repository: repo='ppa:ondrej/php5' state=present
-  sudo: yes
-  register: nginxrepoAdded
-
 - name: Install nginx
   sudo: yes
   apt: pkg={{item}} state=latest update_cache=true
@@ -12,7 +7,6 @@
      - python-software-properties
      - nginx-common
      - nginx
-  when: nginxrepoAdded|success
   notify:
     - Reload Nginx
 
