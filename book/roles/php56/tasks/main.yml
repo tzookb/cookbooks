@@ -20,6 +20,7 @@
     - php5-fpm
   when: phpFor == "nginx"
   register: phpInstalled
+  notify: Restart php5-fpm
 
 
 
@@ -32,6 +33,13 @@
      - php5-curl
      - php5-gd
      - php5-mcrypt
+  when: php56repoAdded|success
+  register: phpInstalled
+
+- name: Install PHP pkgs
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items: "{{php_pkgs}}"
   when: php56repoAdded|success
   register: phpInstalled
 
