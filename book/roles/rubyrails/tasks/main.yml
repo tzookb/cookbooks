@@ -5,21 +5,20 @@
 #
 - name: Get key for rvm
   shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  register: hello
+  register: railsKeyAdded
 
 - name: Install Curl
+  sudo: true
   apt: pkg=curl state=installed update_cache=true
-  when: ppastable|success
-  register: curlinstalled
+  when: railsKeyAdded|success
 
 - name: Install rais
-  when: curlinstalled|success
   shell: \curl -sSL https://get.rvm.io | bash -s stable --rails
   register: hello
 
 
-- name: Make rvm Accessible
-  shell: source ~/.rvm/scripts/rvmgem install passenger
-
- - name: Install Passenger
-  shell: gem install passenger
+#- name: Make rvm Accessible
+#  shell: source ~/.rvm/scripts/rvmgem install passenger
+#
+# - name: Install Passenger
+#  shell: gem install passenger
