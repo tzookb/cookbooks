@@ -20,7 +20,7 @@
     - php5-fpm
   when: phpFor == "nginx"
   register: phpInstalled
-  notify: Restart php5-fpm
+  #notify: Restart php5-fpm
 
 
 
