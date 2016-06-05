@@ -10,6 +10,7 @@
   apt: pkg={{item}} state=latest update_cache=true
   with_items:
     - python-software-properties
+    - libapache2-mod-php5
   when: phpFor == "apache"
   register: phpInstalled
 

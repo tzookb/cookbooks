@@ -1,17 +1,9 @@
 ---
 
-- name: Add Php 5.3 Repository
-  apt_repository: repo='ppa:eugenesan/ppa' state=present
+- name: Add apache2.4 Repository
+  apt_repository: repo='ppa:ondrej/apache2' state=present
   sudo: yes
-  when: phpVersion==5.3
-  register: php5RepoAdded
-
-- name: Add Php 5.5 Repository
-  apt_repository: repo='ppa:ondrej/php5' state=present
-  sudo: yes
-  when: phpVersion==5.5
-  register: php5RepoAdded
-
+  register: apache24repoAdded
 
 - name: Install Apache
   sudo: yes
@@ -19,13 +11,6 @@
   with_items:
      - python-software-properties
      - apache2
-     - php5
-     - php5-cli
-     - php5-curl
-     - php5-gd
-     - php5-mcrypt
-     - libapache2-mod-php5
-  when: php5RepoAdded|success
   register: apacheInstalled
   notify:
     - Reload Apache2
@@ -37,10 +22,10 @@
   notify:
       - Reload Apache2
 
-- name: write our apache2.conf
-  sudo: yes
-  template: src=apache2.conf.j2 dest=/etc/apache2/apache2.conf
-  notify: Reload Apache2
+# - name: write our apache2.conf
+#   sudo: yes
+#   template: src=apache2.conf.j2 dest=/etc/apache2/apache2.conf
+#   notify: Reload Apache2
 
 
 - name: write our /etc/apache2/sites-available/default
