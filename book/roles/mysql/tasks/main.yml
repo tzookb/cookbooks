@@ -1,7 +1,7 @@
 ---
 
 - name: Install MySql
-  sudo: yes
+  become: true
   apt: pkg={{item}} state=latest update_cache=true
   with_items:
     - python-mysqldb
@@ -11,7 +11,7 @@
     - Reload MySql
 
 - name: update mysql root password for all root accounts
-  sudo: yes
+  become: true
   mysql_user:
     name: root
     host: "{{ item }}"
@@ -25,9 +25,6 @@
     - 127.0.0.1
     - ::1
     - localhost
-
-- name: pah pah pah pah
-  debug: msg="System {{ mysql_dbs }}"
 
 
 - name: create databases
